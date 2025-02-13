@@ -1,145 +1,74 @@
+<?php 
+
+//Inlude diri ang server.php para maka gamit tas function 
+include './server.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.phptutorial.net/app/css/style.css">
     <title>Login</title>
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
-        }
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            position: relative;
+            margin: 0;
             height: 100vh;
-             background-image: url(image/comp.jpg);
-            background-size: 100% 100%;
-            background-color: #cccccc; /* Used if the image is unavailable */
-            background-position: center; /* Center the image */
-            background-repeat: no-repeat; 
-            background-attachment: fixed;
-        }
-        .container {
+            font-family: 'Poppins', sans-serif;
             display: flex;
-            width: 900px;
-            background: white;
-            border-radius: 30px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            align-items: center;
+            justify-content: center;
             overflow: hidden;
         }
-        .left {
-            flex: 1;
-            padding: 40px;
+
+        /* Background with Blur Effect */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("image/comp.jpg") no-repeat center center/cover;
+            filter: blur(8px); /* Adjust blur level */
+            z-index: -1;
         }
-        .right {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: gray;
-            color: white;
+
+        .wrapper {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
             text-align: center;
+            width: 450px;
+            position: relative;
+            z-index: 1;
         }
-        .login-box h2 {
-            margin-bottom: 20px;
-            font-size: 24px;
-        }
-        .input-group {
+
+        h1 {
+            font-size: 28px;
+            font-weight: bold;
             margin-bottom: 15px;
         }
-        .input-group label {
-            display: block;
-            font-size: 14px;
-            margin-bottom: 5px;
-            color: #555;
-        }
-        .input-group input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background: #f7f7f7;
-        }
-        .btn {
-            width: 100%;
-            padding: 10px;
-            background:green;
-            border: none;
-            color: white;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 16px;
-            transition: 0.3s;
-        }
-        .btn:hover {
-            opacity: 0.8;
-        }
-        .bottom-links {
-            display: flex;
-            justify-content: space-between;
-            font-size: 14px;
-            margin-top: 10px;
-        }
-        .bottom-links a {
-            color: #ff416c;
-            text-decoration: none;
-        }
-        .right h2 {
-            font-size: 24px;
+
+        img {
+            width: 120px;
+            height: 120px;
             margin-bottom: 10px;
         }
-        .signup-btn {
-            padding: 8px 20px;
-            border: 2px solid white;
-            background: transparent;
-            color: white;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .signup-btn:hover {
-            background: white;
-            color: #ff416c;
-        }
+
+
     </style>
 </head>
 <body>
+    <div class="wrapper">
 
-<div class="container">
-    <!-- Left Section (Login Form) -->
-    <div class="left">
-        <form class="login-box" action="login.php" method="POST">
-            <h2>Sign In</h2>
-            <div class="input-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="input-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit" class="btn">Sign In</button>
-            <div class="bottom-links">
-                <label><input type="checkbox"> Remember Me</label>
-                <a href="#">Forgot Password?</a>
-            </div>
-        </form>
-    </div>
-
-    <!-- Right Section (Gradient Background) -->
-    <div class="right">
-        <div>
-            <img src="../sitin/ccslogo.png">
-            <h2>Welcome to login</h2>
-            <p>Don't have an account?</p>
-            <button class="signup-btn"><a href="register.php" >Sign Up</button>
-        </div>
-    </div>
-</div>
-
+            <img src="image/ccs.png" alt="CCS LOGO">
+            <h1>WELCOME TO CCS SIT-IN MONITORING SYSTEM</h1>
+    
+    </div>   
 </body>
 </html>

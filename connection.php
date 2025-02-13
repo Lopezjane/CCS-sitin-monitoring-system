@@ -1,11 +1,13 @@
 <?php
+$host = "localhost"; 
+$user = "root";       
+$pass = "";           
+$dbname = "sitin"; 
 
-//Connection to database
+$conn = new mysqli($host, $user, $pass, $dbname);
 
-$connection = mysqli_connect("localhost", "root", "", "sitin");
-
-if(!$connection){
-    echo "<script>alert('Not connected to database')</script>";
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
+?>
 
-error_reporting(0);

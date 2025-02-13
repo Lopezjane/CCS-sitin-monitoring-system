@@ -1,192 +1,169 @@
+<?php 
+
+//Inlude diri ang server.php para maka gamit tas function 
+include './server.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
+    <link rel="stylesheet" href="https://www.phptutorial.net/app/css/style.css">
+    <title>Login</title>
+
     <style>
-        * {
+        body {
+            position: relative;
             margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
-        }
-        body, html {
-            height: 100%;
-            width: 100%;
-            display: flex;
-        }
-        .container {
-            display: flex;
-            width: 100%;
             height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             overflow: hidden;
         }
-        /* Left Section */
-        .left {
-            flex: 1;
-            background: url('image/lab.jpg') center/cover no-repeat;
-            position: relative;
-        }
-        .left::before {
+
+        /* Background with Blur Effect */
+        body::before {
             content: "";
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(216, 211, 218, 0.5); /* Purple overlay */
+            background: url("image/comp.jpg") no-repeat center center/cover;
+            filter: blur(8px); /* Adjust blur level */
+            z-index: -1;
         }
-        /* Right Section */
-        .right {
-            flex: 1;
-            background: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            position: relative;
-        }
-        .form-container {
-            width: 100%;
-            max-width: 400px;
-            max-height: 100vh;
-            overflow-y: auto;
-            padding: 40px;
-            scrollbar-width: thin;
-            scrollbar-color: rgb(136, 132, 128) #f1f1f1;
-        }
-        .form-container h1 {
+
+        .wrapper {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
             text-align: center;
-            margin-bottom: 20px;
+            width: 450px;
+            position: relative;
+            z-index: 1;
         }
-        .input-group {
+
+        h1 {
+            font-size: 28px;
+            font-weight: bold;
             margin-bottom: 15px;
         }
-        .input-group label {
-            display: block;
-            font-size: 14px;
-            margin-bottom: 5px;
-            color: #555;
+
+        img {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 10px;
         }
-        .input-group input,
-        .input-group select {
+
+        .input-box {
+            margin-bottom: 15px;
+        }
+
+        input, select {
             width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            background: #f7f7f7;
         }
-        .error {
-            color: red;
-            font-size: 12px;
-            display: none;
+
+        /* Flexbox for arranging fields in one row */
+        .row {
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
         }
+
+        .row .input-box {
+            flex: 1;
+        }
+
         .terms {
+            margin: 10px 0;
             font-size: 14px;
-            margin-top: 10px;
+            text-align: left;
         }
-        .terms input {
-            margin-right: 5px;
-        }
+
         .btn {
             width: 100%;
-            padding: 12px;
-            background: green;
-            border: none;
+            padding: 10px;
+            background-color: #553392;
             color: white;
-            cursor: pointer;
+            border: none;
             border-radius: 5px;
+            cursor: pointer;
             font-size: 16px;
-            transition: 0.3s;
         }
+
         .btn:hover {
-            opacity: 0.8;
+            background-color: #CBA1DC;
         }
+
         .bottom-links {
-            text-align: center;
             margin-top: 10px;
+            font-size: 14px;
         }
+
         .bottom-links a {
-            color: #ff416c;
+            color: red;
             text-decoration: none;
         }
 
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .container {
+        .bottom-links a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            .row {
                 flex-direction: column;
-            }
-            .left {
-                height: 40vh;
-                flex: none;
-            }
-            .right {
-                height: 60vh;
-            }
-            .form-container {
-                max-height: 60vh;
-                overflow-y: auto;
             }
         }
     </style>
-    <script>
-        function validateID(event) {
-            let idNo = document.getElementById("idno");
-            let error = document.getElementById("idno-error");
-
-            if (!/^\d{8}$/.test(idNo.value)) {
-                error.style.display = "block";
-                event.preventDefault(); // Stop form submission
-            } else {
-                error.style.display = "none";
-            }
-        }
-
-        function enforceIDFormat(event) {
-            let input = event.target;
-            input.value = input.value.replace(/\D/g, '').slice(0, 8); // Remove non-digits and limit to 8 chars
-        }
-    </script>
 </head>
 <body>
-
-<div class="container">
-    <!-- Left Section (Background Image) -->
-    <div class="left"></div>
-
-    <!-- Right Section (Form) -->
-    <div class="right">
-        <div class="form-container">
+    <div class="wrapper">
+        <form method="POST">
+            <img src="image/ccs.png" alt="CCS LOGO">
             <h1>Sign Up</h1>
-            <form action="register_process.php" method="POST" onsubmit="validateID(event)">
-                <div class="input-group">
-                    <label for="idno">ID Number:</label>
-                    <input type="text" name="idno" id="idno" maxlength="8" oninput="enforceIDFormat(event)" required>
-                    <div class="error" id="idno-error">ID Number must be exactly 8 digits.</div>
+
+            <div class="input-box">
+                <input type="text" name="idno" id="idno" placeholder="Enter your ID number" required>
+            </div>
+
+            <!-- Name Fields in One Row -->
+            <div class="row">
+                <div class="input-box">
+                    <input type="text" name="firstname" id="firstname" placeholder="First Name" required>
                 </div>
-                <div class="input-group">
-                    <label for="firstname">Firstname:</label>
-                    <input type="text" name="firstname" id="firstname" required>
+                <div class="input-box">
+                    <input type="text" name="lastname" id="lastname" placeholder="Last Name" required>
                 </div>
-                <div class="input-group">
-                    <label for="lastname">Lastname:</label>
-                    <input type="text" name="lastname" id="lastname" required>
+                <div class="input-box">
+                    <input type="text" name="middlename" id="middlename" placeholder="Middle Name">
                 </div>
-                <div class="input-group">
-                    <label for="middlename">Middlename:</label>
-                    <input type="text" name="middlename" id="middlename">
-                </div>
-                <div class="input-group">
-                    <label for="course">Course:</label>
+            </div>
+
+            <!-- Course and Year Level in One Row -->
+            <div class="row">
+                <div class="input-box">
                     <select name="course" id="course" required>
                         <option value="" disabled selected>Select Course</option>
                         <option value="BSIT">BSIT</option>
                         <option value="CCS">CCS</option>
+                        <option value="CHM">CHM</option>
+                        <option value="SOCIAL WORK">SOCIAL WORK</option>
+                        <option value="BPED">BPED</option>
+                        <option value="CBA">CBA</option>
+                        <option value="ENGINEERING">ENGINEERING</option>
+                        <option value="NURSING">NURSING</option>
                     </select>
                 </div>
-                <div class="input-group">
-                    <label for="yearlevel">Year Level:</label>
+
+                <div class="input-box">
                     <select name="yearlevel" id="yearlevel" required>
                         <option value="" disabled selected>Select Year Level</option>
                         <option value="1">1</option>
@@ -195,29 +172,30 @@
                         <option value="4">4</option>
                     </select>
                 </div>
-                <div class="input-group">
-                    <label for="email">Email Address:</label>
-                    <input type="email" name="email" id="email" required>
-                </div>
-                <div class="input-group">
-                    <label for="username">Username:</label>
-                    <input type="text" name="username" id="username" required>
-                </div>
-                <div class="input-group">
-                    <label for="password">Password:</label>
-                    <input type="password" name="password" id="password" required>
-                </div>
-                <div class="terms">
-                    <input type="checkbox" required> I agree to the <a href="#">Terms of User</a>
-                </div>
-                <button type="submit" class="btn">Sign Up</button>
-                <div class="bottom-links">
-                    Already have an account? <a href="index.php">Sign in →</a>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+            </div>
 
+            <div class="input-box">
+                <input type="email" name="email" id="email" placeholder="Enter your Email" required>
+            </div>
+
+            <div class="input-box">
+                <input type="text" name="username" id="username" placeholder="Enter your Username" required>
+            </div>
+
+            <div class="input-box">
+                <input type="password" name="password" id="password" placeholder="Enter your Password" required>
+            </div>
+
+            <div class="terms">
+                <input type="checkbox" required> I agree to the <a href="#">Terms of Use</a>
+            </div>
+
+            <button  class="btn" name="SubmitForm" type="submit">Sign Up</button>
+
+            <div class="bottom-links">
+                Already have an account? <a href="login.php">Sign in →</a>
+            </div>
+        </form>
+    </div>   
 </body>
 </html>
