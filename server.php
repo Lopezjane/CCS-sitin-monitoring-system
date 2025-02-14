@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['id'] = $user['idno'];  // Store user ID
             $_SESSION['username'] = $user['username']; // Store username
 
-            echo "<script>alert('Login successful! Redirecting to dashboard...'); window.location.href='index.php';</script>";
+            echo "<script>alert('Login successful! Redirecting to dashboard...'); window.location.href='dashboard.php';</script>";
             exit();
         } else {
             echo "<script>alert('Invalid username or password. Please try again.'); window.location.href='login.php';</script>";
@@ -56,5 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<script>alert('Invalid username or password. Please try again.'); window.location.href='login.php';</script>";
     }
 }
+
+
 ?>
 
